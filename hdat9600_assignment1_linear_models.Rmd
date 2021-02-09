@@ -15,17 +15,7 @@ library(Hmisc)
 
 <br>
 
-## Instructions
-
-This file is the R Markdown document in which you need to complete your HDAT9600 Linear Models assignment. This assignment is assessed and will count for 25% of the total course mark.
-
-You should complete the tasks described below, in the spaces provided. Don't hesitate to ask for help (via OpenLearning @andb) --- but remember that these are **individual** assignments and thus what you submit should be your own work, and you need to both understand and be able to explain what you did in your solutions.
-
-Each task below attracts the indicated number of marks (out of a total of 20 marks for the assignment).
-
-<br>
-
-## Task 1 (3 marks)
+## Task 1
 
 In this question, you will be using the `prostate` dataset which comes with the _faraway_ package for R. You should already have the _faraway_ package installed. If not, install it now using the Packages tab in RStudio or the `install.packages()` function at R console prompt.
 
@@ -45,11 +35,7 @@ a.  Using the `prostate` dataset, fit a linear model with `lpsa` as the outcome 
 b.  Compute and display the 95% and 90% confidence intervals for  the `lweight` and `age` predictor variables. (Hint: examine the manual (help) page for the `confint()` function.)
 c. Based on those confidence intervals, state what you can deduce about the _p_-values in the regression summary for the model. Then display the regression summary. 
 d.  Compute and plot a 95% joint confidence region for the `age` and `lbph` predictor variables from this model. Also indicate the origin point in this plot.
-e.  The location of the origin point with respect to the confidence region indicates the outcome of a particular hypothesis test. State what that hypothesis test is, and what the outcome is.
-
-### Marking rubric, hints and tips
-
-Two marks will be awarded for the R programming tasks, and one mark in total for correct statements about deduction from the confidence intervals (part iii.), and about the hypothesis test and its outcome for the joint confidence regions (part v.). R code must be used for all calculations and to draw the plot. 
+e.  The location of the origin point with respect to the confidence region indicates the outcome of a particular hypothesis test. State what that hypothesis test is, and what the outcome is. 
 
 ```{r task-1}
 
@@ -87,7 +73,7 @@ The origin point is placed at 0,0 to test the joint null hypothesis that $H_0 \ 
 
 <br>
 
-## Task 2 (7 marks)
+## Task 2
 
 In Task 2 of this assignment, you will be using the `fat` dataset which comes with the _faraway_ package for R which you should already have installed. If not, install it now using the Packages tab in RStudio or the `install.packages()` function at R console prompt.
 
@@ -97,7 +83,7 @@ In Task 2 of this assignment, you will be using the `fat` dataset which comes wi
 data(fat, package="faraway")
 ```
 
-a.  Fit a linear regression model to the `fat` dataset using `brozek` as the outcome (response) variable and the following variables as predictors: `age`, `weight`, `height`, `neck`, `chest`, `abdom`, `hip`, `thigh`, `knee`, `ankle`, `biceps`, `forearm`, `wrist`. Assign the name `fullfat` to the resulting model object. Print the summary output for this model. (0.5 mark)
+a.  Fit a linear regression model to the `fat` dataset using `brozek` as the outcome (response) variable and the following variables as predictors: `age`, `weight`, `height`, `neck`, `chest`, `abdom`, `hip`, `thigh`, `knee`, `ankle`, `biceps`, `forearm`, `wrist`. Assign the name `fullfat` to the resulting model object. Print the summary output for this model. 
 
 ```{r task-2-a}
 # fit a linear model fullfat and print the summary
@@ -107,7 +93,7 @@ summary(fullfat)
 
 ```
 
-b.  Fit a linear regression model to the `fat` dataset using `brozek` as the outcome (response) variable and only the following variables as predictors: `age`, `weight`, `height`, `abdom` (on the basis that they are easily measured by individuals at home with just a tape measure). Assign the name `reducedfat` to the resulting model object. Print the summary output for this model. (0.5 mark)
+b.  Fit a linear regression model to the `fat` dataset using `brozek` as the outcome (response) variable and only the following variables as predictors: `age`, `weight`, `height`, `abdom` (on the basis that they are easily measured by individuals at home with just a tape measure). Assign the name `reducedfat` to the resulting model object. Print the summary output for this model.
 
 ```{r task-2-b}
 # fit a linear model reducedfat and print the summary
@@ -117,7 +103,7 @@ summary(reducedfat)
 
 ```
 
-c.  Compare the `reducedfat` model to the `fullfat` model using the `anova()` function. Hint: look at the section on "Testing pairs of predictors" in Chapter 2. The same method can be used to compare models that differ by more than just two predictors. (1 mark)
+c.  Compare the `reducedfat` model to the `fullfat` model using the `anova()` function. Hint: look at the section on "Testing pairs of predictors" in Chapter 2. The same method can be used to compare models that differ by more than just two predictors.
 
 ```{r task-2-c}
 
@@ -126,11 +112,11 @@ print(fav)
 
 ```
 
-d. Comment on whether it is justifiable to use the simplified model or not. (0.5 mark)
+d. Comment on whether it is justifiable to use the simplified model or not.
 
 We can reject the null hypothesis because the _p_-value is small. Thus, it is not reasonable to simplify the model by removing the predictors : `neck`,`chest`,`hip`,`thigh`,`knee`,`ankle`,`biceps`,`forearm`, and `wrist`. From the `fullfat` regression output, I know that the variables `wrist`,`forearm`, and `neck` had small _p_-values and thus contribute to the model and have an impact when removed. 
 
-e. Compute a 95% **prediction** interval for the **mean** (not median) predictor values for the full and reduced models, and write a single sentence comparing the intervals. Do the intervals vary by much? (1 mark)
+e. Compute a 95% **prediction** interval for the **mean** (not median) predictor values for the full and reduced models, and write a single sentence comparing the intervals. Do the intervals vary by much? 
 
 ```{r task-2-e}
 # get all the predictors as a matrix for each model
@@ -149,7 +135,7 @@ predict(reducedfat, new=as.data.frame(t(mean_reducedfat)), interval="prediction"
 
 The predicted mean body fat percentage is exactly the same for each model, but the prediction interval for the fullfat model is narrower than the reducedfat model by approximately 0.5.  
 
-f. Repeat step e. but this time for the **confidence** intervals for the for the **mean** (not median) predictor values for the full and reduced models, and again write a single sentence comparing the intervals. Do the intervals vary by much? (1 mark)
+f. Repeat step e. but this time for the **confidence** intervals for the for the **mean** (not median) predictor values for the full and reduced models, and again write a single sentence comparing the intervals. Do the intervals vary by much? 
 
 ```{r task-2-f}
 # get all the predictors as a matrix for each model
@@ -168,7 +154,7 @@ predict(reducedfat, new=as.data.frame(t(mean_reducedfat)), interval="confidence"
 
 The interval for the fullfat model is narrower than the interval for the reducedfat model by approximately 0.04.
 
-g.  Using the reduced model, identify the two observations with the greatest Cook's distance. Remove (or exclude) those observations form the dataset and re-fit the reduced model. Comment on any differences you see in the model summary (if any). (1.5 marks)
+g.  Using the reduced model, identify the two observations with the greatest Cook's distance. Remove (or exclude) those observations form the dataset and re-fit the reduced model. Comment on any differences you see in the model summary (if any).
 
 ```{r task-2-g}
 # get the Cook's distances
@@ -184,7 +170,7 @@ summary(reducedfat_ex)
 
 The _p_-value and resulting significance level for the `weight` variable changed. The adjusted R-squared value increased from 0.7166 to 0.7206 and the F-statistic changed from 159.7 to 161.5. 
 
-h. Recompute the 95% prediction and 95% confidence intervals for the **mean** predictor values for the reduced model with the two most influential observations removed. Comment on whether removing the influential observations made much difference to the predicted values and their intervals. (1 mark)
+h. Recompute the 95% prediction and 95% confidence intervals for the **mean** predictor values for the reduced model with the two most influential observations removed. Comment on whether removing the influential observations made much difference to the predicted values and their intervals.
 
 ```{r task-2-h}
 # get all the predictors as a matrix for new model
@@ -203,7 +189,7 @@ The predicted mean body fat percentage decreased from 18.938 to 18.828 with the 
 
 <br>
 
-## Task 3 (10 marks)
+## Task 3
 
 In this task, you will be using the `hips` dataset which comes with the _faraway_ package for R which you should already have installed.  If not, install it now using the Packages tab in RStudio or the `install.packages()` function at R console prompt.
 
@@ -215,9 +201,7 @@ data(hips, package="faraway")
 
 The `hips` dataset comes from a study undertaken in the 1950s at the [Royal Mineral Hospital](https://en.wikipedia.org/wiki/Royal_National_Hospital_for_Rheumatic_Diseases) (now known as the Royal National Hospital for Rheumatic Diseases) in Bath, UK. The study involved patients with [ankylosing spondylitis](https://en.wikipedia.org/wiki/Ankylosing_spondylitis), an auto-immune disease which causes inflammation and eventual seizing up (ankylosis) of the joints of the spine, and to a lesser extent of the hips and shoulders. Patients were randomly allocated to either a treatment group, in which they received physiotherapy involving daily stretching exercises for their hip joints, or to a control group in which no stretching or other physiotherapy was provided. Hip mobility in terms of flexion (bringing the knee up towards the chest) and rotation (rotating the knee inwards and outwards) were measured on each side (right and left), before the study commenced, and after it was completed.
 
-a. (2.5 marks)
-
-Carry out a brief exploratory data analysis, examining each variable, and the relationships between all the variables. How many patients were assigned to each group (treatment or control). Are there differences in the variables between the two groups (treatment and control) or sides (left or right)? Show your code and written explanations.  
+a.Carry out a brief exploratory data analysis, examining each variable, and the relationships between all the variables. How many patients were assigned to each group (treatment or control). Are there differences in the variables between the two groups (treatment and control) or sides (left or right)? Show your code and written explanations.  
 
 ```{r task-3-a}
 #preview dataset
@@ -314,9 +298,7 @@ From the boxplot output, I observe that there there is minimal differences for t
 Also, I observe relationships between a few of the predictors in the dataset.  I observe a positive relationship in the scatterplots between `fbef` and `faft` and `rbef` and `raft`.  This is confirmed when I observe the correlations between these variables, a value of 0.66 and 0.74.  This makes sense as the flexion and rotation angles before would correlate with the after values for the majority of patients.  
 
 
-b. (1 mark)
-
-Create two new variables, called `flexdiff` and `rotdiff`, which contain the difference between the before and after flexion, or the before and after rotation, respectively. Use histograms to show the distribution of these new variables for each of the two groups (treatment or control). What do you observe?
+b. Create two new variables, called `flexdiff` and `rotdiff`, which contain the difference between the before and after flexion, or the before and after rotation, respectively. Use histograms to show the distribution of these new variables for each of the two groups (treatment or control). What do you observe?
 
 ```{r task-3-b}
 hips$flexdiff = hips$faft - hips$fbef
@@ -347,15 +329,11 @@ hist(subset(hips$rotdiff,hips$grp=='treat'),
 ```
 I observe that the treatment groups for both the Flexion and Rotation angle differences have a higher frequency of larger changes than the control groups.  The Rotation angle shows a marked improvement for the treatment group especially.  Both the control and treatment groups have the highest frequency between 0 and 5, but the treatment group has a higher frequency for differences above 5, and a lower frequency for negative differences. The Flexion angle has the higher frequency between 0 and 10 for both the treatment and control groups. However, the treatment group has a higher frequency of differences above 10, and also has more extreme differences for both positive and negative differences. This shows a possible treatment effect, but more exploration is needed to confirm what the graphs are showing. 
 
-c. (1.5 marks)
-
-The data set contains two observations for each patient --- one for the right hip, and one for the left hip. If we fit standard linear regression models using OLS, should we analyse all the data in one model, or should we fit two separate models, one for the right side hips and the other for the left side hips, or should we fit one model and include the `side` variable as a predictor? Justify your answer based on the assumptions we rely on for OLS linear models. 
+c. The data set contains two observations for each patient --- one for the right hip, and one for the left hip. If we fit standard linear regression models using OLS, should we analyse all the data in one model, or should we fit two separate models, one for the right side hips and the other for the left side hips, or should we fit one model and include the `side` variable as a predictor? Justify your answer based on the assumptions we rely on for OLS linear models. 
 
 Two separate models, one for the right side hips and the other for the left side hips, will need to be fit and used. The reasons being that there will multicollinearity issues since the observations for the right and left side will be highly correlated. The observations will not be independent since each person has two hips and thus two observations in the dataset. This will also lead to autocorrelation in the error terms as the error for one hip will have systematic correlation for the other hip. Both of these assumptions are violated by analysing the data in one model, and separate models should be used for each side to ensure the OLS procedure produces the best estimates. 
 
-d. (1 mark)
-
-Fit a model to the data for right-side hips only. Use `flexdiff` as the outcome, and the `grp` variable as a sole predictor. Report on whether there appears to be a treatment effect. Repeat this for the left hips. 
+d. Fit a model to the data for right-side hips only. Use `flexdiff` as the outcome, and the `grp` variable as a sole predictor. Report on whether there appears to be a treatment effect. Repeat this for the left hips. 
 
 ```{r task-3-d}
 
@@ -370,9 +348,7 @@ summary(flexlh_lm)
 
 No, there does not appear to be a treatment effect for the flexion angle difference. For both the right and left side, the `grp` variable is not significant at any level.  
 
-e. (1 mark)
-
-Repeat all aspects of Q4 but substituting the `rotdiff` variable as the outcome.
+e. Repeat all aspects of Q4 but substituting the `rotdiff` variable as the outcome.
 
 ```{r task-3-e}
 #fit linear model for right side hips only
@@ -386,9 +362,7 @@ summary(rotlh_lm)
 
 Yes, there does appear to be a treatment effect for the rotation angle difference.  The `grp` variable is significant at the 99% significance level for the right side hips, and 95% significance level for the left side hips. 
 
-f. (1 mark)
-
-For the right-side hips only, re-fit the models you created for Q4 and Q5, but add the "before" values for flexion and rotation to each model as additional predictors. Report briefly on what you find.  
+f. For the right-side hips only, re-fit the models you created for Q4 and Q5, but add the "before" values for flexion and rotation to each model as additional predictors. Report briefly on what you find.  
 
 ```{r task-3-f}
 #fit linear model for flexion for right side hips only
@@ -403,9 +377,7 @@ summary(rotrh_lm_ext)
 
 With the `fbef` variable added for the flexion angle difference model, the `grp` variable becomes significant at the 99% significance level and the `fbef` variable is significant at the 99.9% significance level. However, with the `rbef` variable added for the rotation angle difference model, the `grp` variable becomes less significant (still significant at the 95% significance level) and the `rbef` is only significant at the 90% significance level. Both models did see an increase in their respective Adjusted-R square values, but the increase was more drastic for the flexion angle difference model. 
 
-g. (1 mark)
-
-Use both "before" and "after" values as predictors (as well as `grp`) in a model using right-side hips only, with `rotdiff` as the outcome. Comment on what is wrong with this model. 
+g. Use both "before" and "after" values as predictors (as well as `grp`) in a model using right-side hips only, with `rotdiff` as the outcome. Comment on what is wrong with this model. 
 
 ```{r task-3-g}
 #fit linear model for rotation for right side hips only
@@ -415,9 +387,8 @@ summary(rotrh_lm_ext_two)
 ```
 
 The model is "too perfect".  Since the outcome variable, `rotdiff`, is a calculation based on `rbef` and `raft`, there is perfect predictive power in the model.  Because the outcome variable is a linear combination of the two predictive variables, the matrix is not full rank and thus not invertible. This model is useless in reality and not valid. 
-h. (1 mark)
 
-Plot fitted values for the hip rotation model you fitted in Q6, holding the `rbef` variable fixed at the mean value of that variable for right hips across both treatment and control groups. 
+h. Plot fitted values for the hip rotation model you fitted in Q6, holding the `rbef` variable fixed at the mean value of that variable for right hips across both treatment and control groups. 
 
 
 ```{r task-3-h}
@@ -431,12 +402,3 @@ rhip_fitted <- predict(rotrh_lm_ext,new=rhip_df)
 plot(rhip_fitted)
 
 ```
-
-<br>
-
-### Save and knit
-
-**Reminder**: don't forget to save this file and to knit it to check that everything works.
-
-## Submit your assignment
-When you have finished, and are satisfied with your assignment solutions, and this file knits without errors and the output looks the way you want, then you should upload both the .Rmd file and rendered (knited) .html file to the assessment respective upload box in OL.
